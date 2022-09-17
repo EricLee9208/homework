@@ -1,5 +1,5 @@
 #!/Users/yeosujin/.nvm/versions/node/v14.20.0/bin/node
-
+//shebang to run script without having to type "node" everytime
 
 const tLBorder = '╭';
 const tRBorder = '╮';
@@ -10,49 +10,35 @@ const vLine = '\u2502';
 const lMiddle = '\u251c';
 const rMiddle = '\u2524';
 
-// let temp = [process.argv[2],process.argv[3],process.argv[4]]
 let x = 2;
 let arr = []
 
+//create array using user input. No limit to the input count
 while (process.argv[x] != undefined) {
     arr.push(process.argv[x])
     x++
 }
 
-// temp.forEach(element => {
-//   if(element != undefined){
-//     arr.push(element)
-//   }  
-
-
-// });
-
-
 function drawLine(num) {
     console.log(hLine.repeat(num))
 }
-
-//drawLine(4);
-//drawLine(8);
 
 function drawTopBorder(num) {
     console.log(tLBorder, hLine.repeat(num), tRBorder);
 }
 
-//drawTopBorder(9)
 
 function drawMiddleBorder(num) {
     console.log(lMiddle, hLine.repeat(num), rMiddle);
 }
 
-//drawMiddleBorder(9)
 
 function drawBottomBorder(num) {
     console.log(bLBorder, hLine.repeat(num), bRBorder);
 }
 
-//drawBottomBorder(9)
 
+// Added maxLength parameter to align the bars properly
 function drawBarsAround(str, maxLength) {
     if (str.length < maxLength) {
         console.log(vLine, str, " ".repeat(maxLength - str.length - 1), vLine);
@@ -60,8 +46,6 @@ function drawBarsAround(str, maxLength) {
         console.log(vLine, str, vLine);
     }
 }
-
-//drawBarsAround("My Name is Dan")
 
 function boxIt(arr) {
     let maxLength = 0;
