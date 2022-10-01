@@ -48,14 +48,18 @@ function complete(index) {
 }
 
 function deleting(index) {
-  let a = todo_list[index].toString();
-  let start = a.indexOf(" ");
-  console.log(`Deleted "${a.slice(start + 1)}"`);
-  todo_list.splice(index, 1);
-  for (let i = index; i < todo_list.length; i++) {
-    let a = todo_list[i].toString();
-    let start = a.indexOf("[");
-    todo_list[i] = `${i}${a.slice(start)}`;
+  if (index < todo_list.length) {
+    let a = todo_list[index].toString();
+    let start = a.indexOf(" ");
+    console.log(`Deleted "${a.slice(start + 1)}"`);
+    todo_list.splice(index, 1);
+    for (let i = index; i < todo_list.length; i++) {
+      let a = todo_list[i].toString();
+      let start = a.indexOf("[");
+      todo_list[i] = `${i}${a.slice(start)}`;
+    }
+  } else {
+    console.log("Index out of range.");
   }
   todo_function();
 }
