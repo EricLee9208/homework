@@ -76,8 +76,8 @@ function todo_function() {
       } else if (input === "n") {
         add();
       } else if (input[0] === "c") {
-        let addIndex = parseInt(input.slice(1));
-        complete(addIndex);
+        let completeIndex = parseInt(input.slice(1));
+        complete(completeIndex);
       } else if (input[0] === "d") {
         let deleteIndex = parseInt(input.slice(1));
         deleting(deleteIndex);

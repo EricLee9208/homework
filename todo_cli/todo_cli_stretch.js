@@ -77,9 +77,55 @@ function deleting(index) {
   todo_function();
 }
 
-// rl.setPrompt(`(v) View ● (n) New ● (cX) Complete ● (dX) Delete ● (q) Quit`);
-// console.log(rl.getPrompt());
+//converting todo_list to JSON
+function todo_list_To_JSON() {
+  let result = [];
 
+  for (const todo of todo_list) {
+    let startIndex = todo.indexOf(" ");
+
+    if (todo.includes("[✔]")) {
+      let obj = { completed: true, title: todo.slice(startIndex + 1) };
+      let todoJSON = JSON.stringify(obj);
+      result.push(todoJSON);
+    } else {
+      let obj = { completed: false, title: todo.slice(startIndex + 1) };
+      let todoJSON = JSON.stringify(obj);
+      result.push(todoJSON);
+    }
+  }
+  return result;
+}
+
+function save() {
+  let result = todo_list_To_JSON();
+
+  rl.question("What? (myTodos.json)\n", (input) => {
+    // if user inputs path, save data to that path
+    if (input.includes(".json")) {
+      fs.writeFile(input, `[${result}]`, "utf8", (err) => {
+        if (err) {
+          console.error;
+        } else {
+          console.log(`List saved to "${input}"`);
+          todo_function();
+        }
+      });
+    } else {
+      // if user does not pass in path, save to default path "myTodos.json"
+      fs.writeFile("myTodos.json", `[${result}]`, "utf8", (err) => {
+        if (err) {
+          console.error;
+        } else {
+          console.log(`List saved to "myTodos.json"`);
+          todo_function();
+        }
+      });
+    }
+  });
+}
+
+// created todo_function to do recurssion
 function todo_function() {
   rl.question(
     "(v) View ● (n) New ● (cX) Complete ● (dX) Delete ● (s) Save ● (q) Quit \n",
@@ -104,50 +150,6 @@ function todo_function() {
       }
     }
   );
-}
-
-function todo_list_To_JSON() {
-  let result = [];
-
-  for (const todo of todo_list) {
-    let startIndex = todo.indexOf(" ");
-
-    if (todo.includes("[✔]")) {
-      let obj = { completed: true, title: todo.slice(startIndex + 1) };
-      let todoJSON = JSON.stringify(obj);
-      result.push(todoJSON);
-    } else {
-      let obj = { completed: false, title: todo.slice(startIndex + 1) };
-      let todoJSON = JSON.stringify(obj);
-      result.push(todoJSON);
-    }
-  }
-  return result;
-}
-function save() {
-  let result = todo_list_To_JSON();
-
-  rl.question("What? (myTodos.json)\n", (input) => {
-    if (input.includes(".json")) {
-      fs.writeFile(input, `[${result}]`, "utf8", (err) => {
-        if (err) {
-          console.error;
-        } else {
-          console.log(`List saved to "${input}"`);
-          todo_function();
-        }
-      });
-    } else {
-      fs.writeFile("myTodos.json", `[${result}]`, "utf8", (err) => {
-        if (err) {
-          console.error;
-        } else {
-          console.log(`List saved to "myTodos.json"`);
-          todo_function();
-        }
-      });
-    }
-  });
 }
 
 console.log("\nWelcome to Todo CLI!");
