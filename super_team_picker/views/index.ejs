@@ -1,0 +1,12 @@
+<%- include("./partials/header.ejs") %> <% for(let one of cohort ) { %>
+<div style="border: solid black 2px">
+  <img
+    style="border-radius: 50%; width: 2vw; height: 4vh; float: left"
+    src="<%- one.logoUrl %> "
+    alt="<%-one.name  %> logo "
+  />
+  <h2><%-one.name %></h2>
+  <p><%- one.members %></p>
+  <a href="/cohort/<%- one.id %> ">Show Cohort</a>
+</div>
+<% } %> <%- include("./partials/footer.ejs") %>
