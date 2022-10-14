@@ -47,96 +47,73 @@
     </div>
 
     <div>
-      <input type="submit" value="Assign Team" />
+      <input
+        style="float: left; width: 10em"
+        class="btn btn-primary"
+        type="submit"
+        value="Assign Team"
+      />
     </div>
   </form>
 </div>
 
-
-
-
-
-<!-- update functionality -->
-<div class="d-flex">
-    <a 
-        class="btn btn-outline-success mr-2"
-        href="/cohort/<%= cohort.id %>/edit"
-    >
-        Edit
-    </a>
-</div>
-
 <!-- delete functionality -->
-<form action="/cohort/<%- cohort.id %>" method="POST">
-  <input type="hidden" name="_method" value="DELETE" />
-  <input type="submit" class="btn btn-outline-danger" value="DELETE" />
-</form>
+<div style="float: right">
+  <form action="/cohort/<%- cohort.id %>" method="POST">
+    <input type="hidden" name="_method" value="DELETE" />
+    <input
+      type="submit"
+      style="width: 10em"
+      class="btn btn-danger"
+      value="DELETE"
+    />
+  </form>
+</div>
+<!-- update functionality -->
+<div style="float: right; margin-right: 0.5em">
+  <a
+    style="width: 10em; color: white"
+    class="btn btn-success"
+    href="/cohort/<%= cohort.id %>/edit"
+  >
+    Edit
+  </a>
+</div>
+<br />
+<br />
+<br />
+<!-- assigning team function -->
 
-
-
-
-
-
-
-<% if (method && quantity) { %>
-
-<!-- asd -->
-
-<% let memberList = cohort.members.split(",") %>
- 
-<!-- asd -->
-<%   if( method === "teamCount"){ %>
-   
-    <% let shuffledList = memberList.sort(() => Math.random() - 0.5); %> 
- <% let resultArray = []; %> 
-    <% for( let i = quantity; i >0; i-- ) { %>
-       <%   resultArray.push(shuffledList.splice(0, Math.ceil(shuffledList.length / i))); %>
- <% } %> 
-
-    <% let count = 1; %>
-    <ul style="list-style: none">
-        <li># &nbsp &nbsp &nbsp &nbsp <b>Members </b></li>
-        <hr />
-        <% for(let team of resultArray){ %>
-            <li><%- count %>&nbsp &nbsp &nbsp &nbsp &nbsp<%- team %></li>
-            <% count ++ %>
-            <hr />
-            <%} %>
-  
-   </ul>
-  
-<% } %> 
-
-
-<% if(method ==="numberPerTeam"){ %> 
-    <% let shuffledList = memberList.sort(() => Math.random() - 0.5); %> 
-    <% const result = shuffledList.reduce((resultArray, item, index) => { %>
-        <% const chunkIndex = Math.floor(index/quantity)%>
-      
-        <%  if(!resultArray[chunkIndex]) {%>
-        <%    resultArray[chunkIndex] = []; %>
-        <%    } %>
-      
-      <%    resultArray[chunkIndex].push(item)%>
-      
-      <%   return resultArray%>
-        <%  }, [])%>
-       
+<% if (method && quantity) { %> <% let memberList = cohort.members.split(",") %>
+<% if( method === "teamCount"){ %> <% let shuffledList = memberList.sort(() =>
+Math.random() - 0.5); %> <% let resultArray = []; %> <% for( let i = quantity; i
+>0; i-- ) { %> <% resultArray.push(shuffledList.splice(0,
+Math.ceil(shuffledList.length / i))); %> <% } %> <% let count = 1; %>
 <ul style="list-style: none">
-    <li># &nbsp &nbsp &nbsp &nbsp <b>Members </b></li>
-    <hr />
-       
-        <% let count = 1; %>
- <% for(let team of result){ %>
-    <li><%- count %>&nbsp &nbsp &nbsp &nbsp &nbsp<%- team %></li>
-    <% count ++ %>
-    <hr />
-    <%} %>
+  <li># &nbsp &nbsp &nbsp &nbsp <b>Members </b></li>
+  <hr />
+  <% for(let team of resultArray){ %>
+  <li><%- count %>&nbsp &nbsp &nbsp &nbsp &nbsp<%- team %></li>
+  <% count ++ %>
+  <hr />
+  <%} %>
+</ul>
 
-<%  }%> 
+<% } %> <% if(method ==="numberPerTeam"){ %> <% let shuffledList =
+memberList.sort(() => Math.random() - 0.5); %> <% const result
+=shuffledList.reduce((resultArray, item, index) => { %> <% const chunkIndex =
+Math.floor(index/quantity)%> <% if(!resultArray[chunkIndex]) {%>
+<%resultArray[chunkIndex] = []; %> <% } %> <%
+resultArray[chunkIndex].push(item)%> <% return resultArray%> <% }, [])%>
 
+<ul style="list-style: none">
+  <li># &nbsp &nbsp &nbsp &nbsp <b>Members </b></li>
+  <hr />
 
-
-<% } %>
-<!-- sdfsdf -->
+  <% let count = 1; %> <% for(let team of result){ %>
+  <li><%- count %>&nbsp &nbsp &nbsp &nbsp &nbsp<%- team %></li>
+  <% count ++ %>
+  <hr />
+  <%} %> <% }%> <% } %>
+</ul>
 <%- include("./partials/footer.ejs") %>
