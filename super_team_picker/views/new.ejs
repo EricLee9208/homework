@@ -1,0 +1,57 @@
+<%- include("./partials/header.ejs") %>
+<form action="/cohort" method="POST">
+  <div class="mb-3">
+    <label
+      style="font-size: x-large"
+      for="exampleFormControlInput1"
+      class="form-label"
+      >Logo Url</label
+    >
+    <input
+      type="url"
+      class="form-control"
+      name="logoUrl"
+      id="exampleFormControlInput1"
+      placeholder="eg. http://www.example.com/some.png"
+    />
+  </div>
+  <div class="mb-3">
+    <label
+      style="font-size: x-large"
+      for="exampleFormControlInput1"
+      class="form-label"
+      >Name</label
+    >
+    <input
+      type="text"
+      class="form-control"
+      name="name"
+      id="exampleFormControlInput1"
+      placeholder="Flying Funks"
+    />
+  </div>
+  <div class="mb-3">
+    <label
+      style="font-size: x-large"
+      for="exampleFormControlTextarea1"
+      class="form-label"
+      >Members</label
+    >
+    <textarea
+      class="form-control"
+      name="members"
+      id="exampleFormControlTextarea1"
+      rows="3"
+      placeholder="Jon Snow, Daenerys, Melisandre, Arya Stark"
+    ></textarea>
+  </div>
+  <div style="display: flex; justify-content: end">
+    <input
+      style="width: 10em"
+      class="btn btn-primary"
+      type="submit"
+      value="SUBMIT"
+    />
+  </div>
+</form>
+<%- include("./partials/footer.ejs") %>

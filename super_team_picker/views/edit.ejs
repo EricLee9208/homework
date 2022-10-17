@@ -1,0 +1,50 @@
+<%- include("./partials/header.ejs") %>
+
+<h1>Edit Note</h1>
+<form action="/cohort/<%- cohort.id  %> " method="POST">
+  <input type="hidden" name="_method" value="PATCH" />
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Logo Url</label>
+    <input
+      type="url"
+      class="form-control"
+      name="logoUrl"
+      id="exampleFormControlInput1"
+      placeholder="eg. http://www.example.com/some.png"
+      value="<%- cohort.logoUrl  %> "
+    />
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      name="name"
+      id="exampleFormControlInput1"
+      placeholder="Flying Funks"
+      value="<%- cohort.name  %> "
+    />
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">Members</label>
+    <textarea
+      class="form-control"
+      name="members"
+      id="exampleFormControlTextarea1"
+      rows="3"
+      placeholder="Jon Snow, Daenerys, Melisandre, Arya Stark"
+    >
+<%- cohort.members  %></textarea
+    >
+  </div>
+  <div style="display: flex; justify-content: end">
+    <input
+      style="width: 10em"
+      class="btn btn-primary"
+      type="submit"
+      value="Edit"
+    />
+  </div>
+</form>
+
+<%- include("./partials/footer.ejs") %>

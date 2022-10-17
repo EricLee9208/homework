@@ -1,0 +1,119 @@
+<%- include("./partials/header.ejs") %>
+
+<div>
+  <h2><%- cohort.name %></h2>
+  <p><%- cohort.members %></p>
+</div>
+<br />
+<hr />
+
+<div>
+  <form action="/cohort/<%- cohort.id  %> ">
+    <h4>Method</h4>
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="method"
+        value="teamCount"
+      />
+      <label class="form-check-label" for="teamCount"> Team Count </label>
+    </div>
+
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="method"
+        value="numberPerTeam"
+      />
+      <label class="form-check-label" for="numberPerTeam">
+        Number Per Team
+      </label>
+    </div>
+    <br />
+    <div>
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Quantity</label
+        >
+        <input
+          type="number"
+          class="form-control"
+          name="quantity"
+          placeholder="Enter a number"
+        />
+      </div>
+    </div>
+
+    <div>
+      <input
+        style="float: left; width: 10em"
+        class="btn btn-primary"
+        type="submit"
+        value="Assign Team"
+      />
+    </div>
+  </form>
+</div>
+
+<!-- delete functionality -->
+<div style="float: right">
+  <form action="/cohort/<%- cohort.id %>" method="POST">
+    <input type="hidden" name="_method" value="DELETE" />
+    <input
+      type="submit"
+      style="width: 10em"
+      class="btn btn-danger"
+      value="DELETE"
+    />
+  </form>
+</div>
+<!-- update functionality -->
+<div style="float: right; margin-right: 0.5em">
+  <a
+    style="width: 10em; color: white"
+    class="btn btn-success"
+    href="/cohort/<%= cohort.id %>/edit"
+  >
+    Edit
+  </a>
+</div>
+<br />
+<br />
+<br />
+<!-- assigning team function -->
+
+<% if (method && quantity) { %> <% let memberList = cohort.members.split(",") %>
+<% if( method === "teamCount"){ %> <% let shuffledList = memberList.sort(() =>
+Math.random() - 0.5); %> <% let resultArray = []; %> <% for( let i = quantity; i
+>0; i-- ) { %> <% resultArray.push(shuffledList.splice(0,
+Math.ceil(shuffledList.length / i))); %> <% } %> <% let count = 1; %>
+<ul style="list-style: none">
+  <li># &nbsp &nbsp &nbsp &nbsp <b>Members </b></li>
+  <hr />
+  <% for(let team of resultArray){ %>
+  <li><%- count %>&nbsp &nbsp &nbsp &nbsp &nbsp<%- team %></li>
+  <% count ++ %>
+  <hr />
+  <%} %>
+</ul>
+
+<% } %> <% if(method ==="numberPerTeam"){ %> <% let shuffledList =
+memberList.sort(() => Math.random() - 0.5); %> <% const result
+=shuffledList.reduce((resultArray, item, index) => { %> <% const chunkIndex =
+Math.floor(index/quantity)%> <% if(!resultArray[chunkIndex]) {%>
+<%resultArray[chunkIndex] = []; %> <% } %> <%
+resultArray[chunkIndex].push(item)%> <% return resultArray%> <% }, [])%>
+
+<ul style="list-style: none">
+  <li># &nbsp &nbsp &nbsp &nbsp <b>Members </b></li>
+  <hr />
+
+  <% let count = 1; %> <% for(let team of result){ %>
+  <li><%- count %>&nbsp &nbsp &nbsp &nbsp &nbsp<%- team %></li>
+  <% count ++ %>
+  <hr />
+  <%} %> <% }%> <% } %>
+</ul>
+<%- include("./partials/footer.ejs") %>
