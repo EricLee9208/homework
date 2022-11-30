@@ -68,7 +68,7 @@ document.addEventListener('keydown', event =>{
             let img = document.querySelector('img')
             
             if(count == 6){
-                img.setAttribute('src',`./gallows${count}.jpg`)
+                img.setAttribute('src',`./images/gallows6.jpg`)
                 failSound.play()
                 setTimeout(
                     () => {
@@ -81,7 +81,7 @@ document.addEventListener('keydown', event =>{
             else{
                 if(!incorrectAlpha.includes(pressedKey)){
                     incorrectAlpha.push(pressedKey)
-                    img.setAttribute('src',`./gallows${count}.jpg`)
+                    img.setAttribute('src',`./images/gallows${count}.jpg`)
                     count++
             }
             }

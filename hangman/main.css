@@ -1,11 +1,13 @@
 .container{
     margin-top: 2em;
 }
+
 .alphabet{
     border: 1px solid black;
     border-radius: 15%;
     margin: 0.5em;
     padding: 0.5em;
+    padding-right: 1px;
 }
 .answerUnder{
     border-bottom: 2px solid black;
