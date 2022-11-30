@@ -29,15 +29,17 @@ let answerCount = 0;
 let correctAlpha = []
 let incorrectAlpha =[]
 let allAlphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split("")
-console.log(allAlphabet);
+// console.log(allAlphabet);
 
 document.addEventListener('keydown', event =>{
-    console.log(event.key.toUpperCase());
+    // console.log(event.key.toUpperCase());
     let pressedKey = event.key.toUpperCase()
     if(allAlphabet.includes(pressedKey)){
     alphabet.forEach(element => {
         if(element.getAttribute('id') == pressedKey){
            element.style.backgroundColor = "orange"
+           element.style.color = "white"
+           element.style.border = "orange"
         } 
     });
         if(answer.includes(pressedKey)){
@@ -58,8 +60,8 @@ document.addEventListener('keydown', event =>{
                                     11
                                 );
                         } 
-                        console.log(correctAlpha);
-                    console.log(answerCount);     
+                    //     console.log(correctAlpha);
+                    // console.log(answerCount);     
                 }
                }               
             }
@@ -67,25 +69,28 @@ document.addEventListener('keydown', event =>{
         else{
             let img = document.querySelector('img')
             
-            if(count == 6){
-                img.setAttribute('src',`./images/gallows6.jpg`)
-                failSound.play()
-                setTimeout(
-                    () => {
-                        alert("Better luck next time...")
-                        location.reload()
-                    },
-                    100
-                  ); 
-            }
-            else{
+            
+            
                 if(!incorrectAlpha.includes(pressedKey)){
                     incorrectAlpha.push(pressedKey)
                     img.setAttribute('src',`./images/gallows${count}.jpg`)
                     count++
-            }
+                    // console.log(count);
+                    // console.log(incorrectAlpha);
+                    if(count == 7){
+                        
+                        failSound.play()
+                        setTimeout(
+                            () => {
+                                alert("Better luck next time...")
+                                location.reload()
+                            },
+                            100
+                          ); 
+                    }
+                 }
             }
         }
-    }  
+    
     })
 
