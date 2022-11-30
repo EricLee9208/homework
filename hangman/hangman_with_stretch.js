@@ -54,7 +54,7 @@ document.addEventListener('keydown', event =>{
                                 victorySound.play()
                                 setTimeout(
                                         () => {
-                                        alert("Congrats, you won!")
+                                        alert("Congratulations! You Win!")
                                         location.reload()
                                     },
                                     11
