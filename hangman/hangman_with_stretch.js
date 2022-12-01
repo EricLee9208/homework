@@ -1,20 +1,25 @@
 const main = document.getElementById('start')
 const alphaList = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'] 
 
+//creating alphabet boxes
 alphaList.forEach((element, index) => {
     main.innerHTML += `<div class='col-1 alphabet' id='${element}'> ${element} </div>` 
 });
 
+//my mystery word list
 const mysteryWordList = ['Alphabet', 'Mystery', 'React', "Rails","Coding"]
 
+//randomly choosing word from my list, and converting it to upper case
 let random = Math.floor(Math.random() * mysteryWordList.length)
 let answer = mysteryWordList[random].toUpperCase()
+
+//counting unique letter
 const uniqueAnswerCount = new Set(answer).size
 // console.log(uniqueAnswerCount);
 console.log(answer);
 
+//creating place for correct words to display
 const answerPlace = document.getElementById('answer')
-
 for (let index = 0; index < answer.length; index++) {
     answerPlace.innerHTML += `<div class="answerUnder col-1" id="answer${index}"></div>  `
     
